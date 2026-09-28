@@ -1,15 +1,55 @@
 import MainLayout from '../components/layout/MainLayout.jsx';
+import CapacityInput from '../components/vehicle/CapacityInput.jsx';
+import RandomOrderGenerator from '../components/orders/RandomOrderGenerator.jsx';
+import OrderForm from '../components/orders/OrderForm.jsx';
+import OrderList from '../components/orders/OrderList.jsx';
+import { useKnapsack } from '../hooks/useKnapsack.js';
 import './HomePage.css';
 
 function HomePage() {
+  const knapsack = useKnapsack();
+
   return (
     <MainLayout>
       <div className="home-grid">
         <section className="panel home-grid__config" aria-labelledby="config-title">
-          <h2 id="config-title" className="panel__title">Configuración</h2>
+          <div className="panel__header">
+            <h2 id="config-title" className="panel__title">Configuración</h2>
+          </div>
+
+          <div className="panel__section">
+            <h3 className="panel__section-title">Capacidad</h3>
+            <CapacityInput
+              value={knapsack.capacityInput}
+              error={knapsack.capacityError}
+              onChange={knapsack.updateCapacity}
+            />
+          </div>
+
+          <div className="panel__section">
+            <h3 className="panel__section-title">Generador aleatorio</h3>
+            <RandomOrderGenerator
+              onGenerate={knapsack.generateOrders}
+              onLoadExample={knapsack.loadExample}
+            />
+          </div>
+
+          <div className="panel__section">
+            <h3 className="panel__section-title">Agregar pedido</h3>
+            <OrderForm onAddOrder={knapsack.addOrder} disabled={!knapsack.canAddOrders} />
+          </div>
         </section>
+
         <section className="panel home-grid__orders" aria-labelledby="orders-title">
-          <h2 id="orders-title" className="panel__title">Pedidos disponibles</h2>
+          <div className="panel__header">
+            <h2 id="orders-title" className="panel__title">Pedidos disponibles</h2>
+            <p className="panel__subtitle">Los pedidos elegidos se resaltan tras ejecutar.</p>
+          </div>
+          <OrderList
+            orders={knapsack.orders}
+            selectedOrderIds={knapsack.selectedOrderIds}
+            onRemoveOrder={knapsack.removeOrder}
+          />
         </section>
       </div>
     </MainLayout>
