@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import MainLayout from '../components/layout/MainLayout.jsx';
 import CapacityInput from '../components/vehicle/CapacityInput.jsx';
 import RandomOrderGenerator from '../components/orders/RandomOrderGenerator.jsx';
@@ -11,6 +12,13 @@ import './HomePage.css';
 
 function HomePage() {
   const knapsack = useKnapsack();
+  const resultsRef = useRef(null);
+
+  useEffect(() => {
+    if (knapsack.runCount > 0) {
+      resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [knapsack.runCount]);
 
   return (
     <MainLayout>
@@ -66,7 +74,11 @@ function HomePage() {
           />
         </section>
 
-        <section className="panel home-grid__results" aria-labelledby="results-title">
+        <section
+          ref={resultsRef}
+          className="panel home-grid__results"
+          aria-labelledby="results-title"
+        >
           <div className="panel__header">
             <h2 id="results-title" className="panel__title">Resultado</h2>
           </div>

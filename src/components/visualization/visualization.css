@@ -36,6 +36,16 @@
   font-weight: 600;
 }
 
+.selected-orders__scroll {
+  max-height: 360px;
+  overflow: auto;
+}
+
+.selected-orders__scroll thead th {
+  position: sticky;
+  top: 0;
+}
+
 .data-table__numeric {
   text-align: right !important;
   font-variant-numeric: tabular-nums;
