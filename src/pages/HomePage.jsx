@@ -3,6 +3,8 @@ import CapacityInput from '../components/vehicle/CapacityInput.jsx';
 import RandomOrderGenerator from '../components/orders/RandomOrderGenerator.jsx';
 import OrderForm from '../components/orders/OrderForm.jsx';
 import OrderList from '../components/orders/OrderList.jsx';
+import ExecutionControls from '../components/controls/ExecutionControls.jsx';
+import ResultPanel from '../components/results/ResultPanel.jsx';
 import { useKnapsack } from '../hooks/useKnapsack.js';
 import './HomePage.css';
 
@@ -50,6 +52,24 @@ function HomePage() {
             selectedOrderIds={knapsack.selectedOrderIds}
             onRemoveOrder={knapsack.removeOrder}
           />
+        </section>
+
+        <section className="panel home-grid__controls" aria-label="Controles de ejecución">
+          <ExecutionControls
+            canRun={knapsack.canRun}
+            orderCount={knapsack.orders.length}
+            capacity={knapsack.capacity}
+            error={knapsack.executionError}
+            onRun={knapsack.runAlgorithm}
+            onReset={knapsack.resetAll}
+          />
+        </section>
+
+        <section className="panel home-grid__results" aria-labelledby="results-title">
+          <div className="panel__header">
+            <h2 id="results-title" className="panel__title">Resultado</h2>
+          </div>
+          <ResultPanel result={knapsack.result} />
         </section>
       </div>
     </MainLayout>
