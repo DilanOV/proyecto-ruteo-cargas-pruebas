@@ -1,5 +1,9 @@
+import HomePage from './pages/HomePage.jsx';
+import './styles/variables.css';
+import './styles/global.css';
+
 function App() {
-  return <h1>Planificador de Cargas DP</h1>;
+  return <HomePage />;
 }
 
 export default App;
