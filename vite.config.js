@@ -7,8 +7,8 @@ import react from '@vitejs/plugin-react';
 const REPOSITORY_NAME = 'proyecto-ruteo-cargas';
 const PRODUCTION_BASE = process.env.BASE_PATH ?? `/${REPOSITORY_NAME}/`;
 
-export default defineConfig(({ command }) => ({
-  base: command === 'build' ? PRODUCTION_BASE : '/',
+export default defineConfig(({ command, isPreview }) => ({
+  base: command === 'build' || isPreview ? PRODUCTION_BASE : '/',
   plugins: [react()],
   test: {
     environment: 'node',
