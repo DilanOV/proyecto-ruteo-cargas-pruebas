@@ -13,6 +13,7 @@ export function useKnapsack() {
   const [capacityInput, setCapacityInput] = useState(String(DEFAULT_CAPACITY));
   const [result, setResult] = useState(null);
   const [executionError, setExecutionError] = useState(null);
+  const [runCount, setRunCount] = useState(0);
 
   const { value: capacity, error: capacityError } = useMemo(
     () => validateCapacity(capacityInput),
@@ -75,6 +76,7 @@ export function useKnapsack() {
     try {
       setResult(solveKnapsack(orders, capacity));
       setExecutionError(null);
+      setRunCount((currentCount) => currentCount + 1);
     } catch (error) {
       setResult(null);
       setExecutionError(error.message);
@@ -99,6 +101,7 @@ export function useKnapsack() {
     capacityError,
     result,
     executionError,
+    runCount,
     selectedOrderIds,
     canAddOrders: orders.length < INPUT_LIMITS.maxOrders,
     canRun: orders.length > 0 && capacityError === null,

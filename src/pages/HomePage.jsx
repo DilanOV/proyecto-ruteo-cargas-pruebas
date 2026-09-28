@@ -5,6 +5,7 @@ import OrderForm from '../components/orders/OrderForm.jsx';
 import OrderList from '../components/orders/OrderList.jsx';
 import ExecutionControls from '../components/controls/ExecutionControls.jsx';
 import ResultPanel from '../components/results/ResultPanel.jsx';
+import DPTable from '../components/visualization/DPTable.jsx';
 import { useKnapsack } from '../hooks/useKnapsack.js';
 import './HomePage.css';
 
@@ -70,6 +71,20 @@ function HomePage() {
             <h2 id="results-title" className="panel__title">Resultado</h2>
           </div>
           <ResultPanel result={knapsack.result} />
+        </section>
+
+        <section className="panel home-grid__dp" aria-labelledby="dp-title">
+          <div className="panel__header">
+            <h2 id="dp-title" className="panel__title">Visualización DP</h2>
+            <p className="panel__subtitle">
+              Filas = pedidos considerados · Columnas = capacidad · Celda = ganancia óptima
+            </p>
+          </div>
+          {knapsack.result ? (
+            <DPTable key={knapsack.runCount} orders={knapsack.orders} result={knapsack.result} />
+          ) : (
+            <p className="empty-state">La tabla de estados aparecerá al ejecutar el algoritmo.</p>
+          )}
         </section>
       </div>
     </MainLayout>
