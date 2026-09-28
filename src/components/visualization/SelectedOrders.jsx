@@ -7,7 +7,7 @@ function SelectedOrders({ orders }) {
   }
 
   return (
-    <div className="table-scroll">
+    <div className="table-scroll selected-orders__scroll">
       <table className="data-table">
         <caption className="visually-hidden">Pedidos seleccionados por el algoritmo</caption>
         <thead>

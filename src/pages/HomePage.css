@@ -23,6 +23,7 @@
 }
 
 .home-grid__results {
+  scroll-margin-top: var(--space-4);
   grid-area: results;
 }
 

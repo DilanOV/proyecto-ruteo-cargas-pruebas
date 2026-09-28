@@ -20,14 +20,20 @@ function buildStatistics(result) {
 
 function StatisticsPanel({ result }) {
   return (
-    <dl className="statistics-grid">
-      {buildStatistics(result).map(({ label, value, highlight }) => (
-        <div key={label} className={`stat-tile${highlight ? ' stat-tile--highlight' : ''}`}>
-          <dt className="stat-tile__label">{label}</dt>
-          <dd className="stat-tile__value">{value}</dd>
-        </div>
-      ))}
-    </dl>
+    <>
+      <dl className="statistics-grid">
+        {buildStatistics(result).map(({ label, value, highlight }) => (
+          <div key={label} className={`stat-tile${highlight ? ' stat-tile--highlight' : ''}`}>
+            <dt className="stat-tile__label">{label}</dt>
+            <dd className="stat-tile__value">{value}</dd>
+          </div>
+        ))}
+      </dl>
+      <p className="statistics-note">
+        El tiempo se mide con performance.now(). Los navegadores limitan su resolución
+        (≈0.1 ms o más), por lo que ejecuciones muy pequeñas pueden mostrar 0.000 ms.
+      </p>
+    </>
   );
 }
 
